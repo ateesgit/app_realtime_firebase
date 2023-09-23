@@ -144,7 +144,7 @@ class _UpdateRecordState extends State<UpdateRecord> {
 
     // print(file);
   }
-
+// to upload image in to a folder
   uploadFile() async {
     try {
       var imagefile = FirebaseStorage.instance

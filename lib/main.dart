@@ -37,6 +37,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    // database reference code to create a folder called contacts
     DatabaseReference db_Ref =
         FirebaseDatabase.instance.ref().child('contacts');
     return Scaffold(
@@ -63,12 +64,14 @@ class _HomeState extends State<Home> {
         ),
         backgroundColor: Colors.indigo[900],
       ),
+      // to display the details that added to the realtime database
       body: FirebaseAnimatedList(
         query: db_Ref,
         shrinkWrap: true,
         itemBuilder: (context, snapshot, animation, index) {
           Map Contact = snapshot.value as Map;
           Contact['key'] = snapshot.key;
+          // to navigate update the details
           return GestureDetector(
             onTap: () {
               Navigator.push(
@@ -79,7 +82,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               );
-              // print(Contact['key']);
+              print("Contact key"+Contact['key']);
             },
             child: Container(
               child: Padding(
@@ -98,6 +101,7 @@ class _HomeState extends State<Home> {
                       color: Colors.red[900],
                     ),
                     onPressed: () {
+                      // for deleting
                       db_Ref.child(Contact['key']).remove();
                     },
                   ),
